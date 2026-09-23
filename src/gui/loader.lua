@@ -22,7 +22,7 @@ ScreenGui.IgnoreGuiInset = true
 ScreenGui.Parent = guiParent
 
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.fromOffset(320, 172)
+MainFrame.Size = UDim2.fromOffset(420, 220)
 MainFrame.Position = UDim2.fromScale(0.5, 0.52)
 MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 MainFrame.BackgroundColor3 = Color3.fromRGB(15, 16, 22)
@@ -31,11 +31,11 @@ MainFrame.BorderSizePixel = 0
 MainFrame.Parent = ScreenGui
 
 local CardCorner = Instance.new("UICorner")
-CardCorner.CornerRadius = UDim.new(0, 16)
+CardCorner.CornerRadius = UDim.new(0, 18)
 CardCorner.Parent = MainFrame
 
 local CardStroke = Instance.new("UIStroke")
-CardStroke.Thickness = 1.2
+CardStroke.Thickness = 1.4
 CardStroke.Color = Color3.fromRGB(255, 255, 255)
 CardStroke.Transparency = 1
 CardStroke.Parent = MainFrame
@@ -50,8 +50,8 @@ StrokeGradient.Color = ColorSequence.new({
 StrokeGradient.Parent = CardStroke
 
 local LogoImage = Instance.new("ImageLabel")
-LogoImage.Size = UDim2.fromOffset(52, 52)
-LogoImage.Position = UDim2.new(0.5, 0, 0, 18)
+LogoImage.Size = UDim2.fromOffset(72, 72)
+LogoImage.Position = UDim2.new(0.5, 0, 0, 24)
 LogoImage.AnchorPoint = Vector2.new(0.5, 0)
 LogoImage.BackgroundColor3 = Color3.fromRGB(25, 27, 38)
 LogoImage.BackgroundTransparency = 1
@@ -60,39 +60,39 @@ LogoImage.BorderSizePixel = 0
 LogoImage.Parent = MainFrame
 
 local LogoCorner = Instance.new("UICorner")
-LogoCorner.CornerRadius = UDim.new(0, 12)
+LogoCorner.CornerRadius = UDim.new(0, 16)
 LogoCorner.Parent = LogoImage
 
 local LogoStroke = Instance.new("UIStroke")
 LogoStroke.Color = Color3.fromRGB(99, 102, 241)
-LogoStroke.Thickness = 1
+LogoStroke.Thickness = 1.2
 LogoStroke.Transparency = 1
 LogoStroke.Parent = LogoImage
 
 LogoImage.Image = Asset.Get("cuxe_icon.png")
 
 local HeaderFrame = Instance.new("Frame")
-HeaderFrame.Size = UDim2.fromOffset(145, 22)
-HeaderFrame.Position = UDim2.new(0.5, 0, 0, 80)
+HeaderFrame.Size = UDim2.fromOffset(175, 26)
+HeaderFrame.Position = UDim2.new(0.5, 0, 0, 108)
 HeaderFrame.AnchorPoint = Vector2.new(0.5, 0)
 HeaderFrame.BackgroundTransparency = 1
 HeaderFrame.Parent = MainFrame
 
 local TitleLabel = Instance.new("TextLabel")
-TitleLabel.Size = UDim2.fromOffset(92, 22)
+TitleLabel.Size = UDim2.fromOffset(115, 26)
 TitleLabel.Position = UDim2.fromOffset(0, 0)
 TitleLabel.BackgroundTransparency = 1
 TitleLabel.Text = "CuxeWare"
 TitleLabel.TextColor3 = Color3.fromRGB(245, 245, 250)
 TitleLabel.Font = Enum.Font.GothamBold
-TitleLabel.TextSize = 17
+TitleLabel.TextSize = 21
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 TitleLabel.TextTransparency = 1
 TitleLabel.Parent = HeaderFrame
 
 local BetaBadge = Instance.new("Frame")
-BetaBadge.Size = UDim2.fromOffset(46, 18)
-BetaBadge.Position = UDim2.fromOffset(96, 2)
+BetaBadge.Size = UDim2.fromOffset(54, 20)
+BetaBadge.Position = UDim2.fromOffset(120, 3)
 BetaBadge.BackgroundColor3 = Color3.fromRGB(99, 102, 241)
 BetaBadge.BackgroundTransparency = 1
 BetaBadge.BorderSizePixel = 0
@@ -108,26 +108,26 @@ BadgeText.BackgroundTransparency = 1
 BadgeText.Text = "ベータ版"
 BadgeText.TextColor3 = Color3.fromRGB(255, 255, 255)
 BadgeText.Font = Enum.Font.GothamBold
-BadgeText.TextSize = 10
+BadgeText.TextSize = 11
 BadgeText.TextTransparency = 1
 BadgeText.Parent = BetaBadge
 
 local StatusLabel = Instance.new("TextLabel")
-StatusLabel.Size = UDim2.new(1, -40, 0, 14)
-StatusLabel.Position = UDim2.new(0.5, 0, 0, 108)
+StatusLabel.Size = UDim2.new(1, -60, 0, 16)
+StatusLabel.Position = UDim2.new(0.5, 0, 0, 140)
 StatusLabel.AnchorPoint = Vector2.new(0.5, 0)
 StatusLabel.BackgroundTransparency = 1
 StatusLabel.Text = "INITIALIZING CORE..."
 StatusLabel.TextColor3 = Color3.fromRGB(130, 135, 155)
 StatusLabel.Font = Enum.Font.GothamMedium
-StatusLabel.TextSize = 11
+StatusLabel.TextSize = 12
 StatusLabel.TextXAlignment = Enum.TextXAlignment.Center
 StatusLabel.TextTransparency = 1
 StatusLabel.Parent = MainFrame
 
 local BarBackground = Instance.new("Frame")
-BarBackground.Size = UDim2.new(1, -48, 0, 6)
-BarBackground.Position = UDim2.new(0.5, 0, 0, 130)
+BarBackground.Size = UDim2.new(1, -64, 0, 8)
+BarBackground.Position = UDim2.new(0.5, 0, 0, 166)
 BarBackground.AnchorPoint = Vector2.new(0.5, 0)
 BarBackground.BackgroundColor3 = Color3.fromRGB(28, 30, 42)
 BarBackground.BackgroundTransparency = 1
@@ -156,14 +156,14 @@ BarGradient.Color = ColorSequence.new({
 BarGradient.Parent = ProgressBar
 
 local PercentLabel = Instance.new("TextLabel")
-PercentLabel.Size = UDim2.new(1, -48, 0, 14)
-PercentLabel.Position = UDim2.new(0.5, 0, 0, 144)
+PercentLabel.Size = UDim2.new(1, -64, 0, 16)
+PercentLabel.Position = UDim2.new(0.5, 0, 0, 182)
 PercentLabel.AnchorPoint = Vector2.new(0.5, 0)
 PercentLabel.BackgroundTransparency = 1
 PercentLabel.Text = "0%"
 PercentLabel.TextColor3 = Color3.fromRGB(150, 155, 175)
 PercentLabel.Font = Enum.Font.GothamMedium
-PercentLabel.TextSize = 10
+PercentLabel.TextSize = 11
 PercentLabel.TextXAlignment = Enum.TextXAlignment.Center
 PercentLabel.TextTransparency = 1
 PercentLabel.Parent = MainFrame
