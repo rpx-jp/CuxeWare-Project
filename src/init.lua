@@ -1,17 +1,8 @@
 -- src/init.lua
 local BaseUrl = "https://raw.githubusercontent.com/rpx-jp/CuxeWare-Project/main/src/"
 
-local folderName = "CuxeWare.config"
-local iconPath = folderName .. "/cuxe_icon.png"
-
-if not isfolder(folderName) then makefolder(folderName) end
-if not isfile(iconPath) then
-    pcall(function()
-        writefile(iconPath, game:HttpGet(BaseUrl .. "assets/cuxe_icon.png"))
-    end)
-end
-
 local WindUI = loadstring(game:HttpGet(BaseUrl .. "api/windui.lua"))()
+
 local function Notify(title, message, duration, icon)
     print(string.format("[CuxeWare - %s] %s", title, message))
     pcall(function()
