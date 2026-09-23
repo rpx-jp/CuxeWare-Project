@@ -5,7 +5,6 @@ local player = Players.LocalPlayer
 
 local BaseUrl = "https://raw.githubusercontent.com/rpx-jp/CuxeWare-Project/main/src/"
 
--- UIの親先を安全に取得 (CoreGui または PlayerGui)
 local guiParent
 pcall(function()
     guiParent = (gethui and gethui()) or game:GetService("CoreGui")
@@ -14,34 +13,17 @@ if not guiParent then
     guiParent = player:WaitForChild("PlayerGui")
 end
 
--- ==========================================
--- 1. 自作 Asset API の読み込み
--- ==========================================
 local Asset = loadstring(game:HttpGet(BaseUrl .. "api/asset.lua"))()
 
--- ==========================================
--- 2. GUIの構築 (モダン・サイバーデザイン)
--- ==========================================
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "CuxeWare_Loader"
 ScreenGui.ResetOnSpawn = false
+ScreenGui.IgnoreGuiInset = true
 ScreenGui.Parent = guiParent
 
--- 背景のアンビエントネオングロー（光の輪）
-local AmbientGlow = Instance.new("ImageLabel")
-AmbientGlow.Size = UDim2.fromOffset(460, 240)
-AmbientGlow.Position = UDim2.fromScale(0.5, 0.5)
-AmbientGlow.AnchorPoint = Vector2.new(0.5, 0.5)
-AmbientGlow.BackgroundTransparency = 1
-AmbientGlow.Image = "rbxassetid://5028857084"
-AmbientGlow.ImageColor3 = Color3.fromRGB(99, 102, 241) -- ネオンインディゴ
-AmbientGlow.ImageTransparency = 1
-AmbientGlow.Parent = ScreenGui
-
--- メインカード (アクリルダーク質感)
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.fromOffset(380, 150)
-MainFrame.Position = UDim2.fromScale(0.5, 0.53)
+MainFrame.Size = UDim2.fromOffset(360, 104)
+MainFrame.Position = UDim2.fromScale(0.5, 0.52)
 MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 MainFrame.BackgroundColor3 = Color3.fromRGB(15, 16, 22)
 MainFrame.BackgroundTransparency = 1
@@ -49,10 +31,9 @@ MainFrame.BorderSizePixel = 0
 MainFrame.Parent = ScreenGui
 
 local CardCorner = Instance.new("UICorner")
-CardCorner.CornerRadius = UDim.new(0, 14)
+CardCorner.CornerRadius = UDim.new(0, 12)
 CardCorner.Parent = MainFrame
 
--- 上部ハイライトのグラデーション枠線
 local CardStroke = Instance.new("UIStroke")
 CardStroke.Thickness = 1.2
 CardStroke.Color = Color3.fromRGB(255, 255, 255)
@@ -68,12 +49,9 @@ StrokeGradient.Color = ColorSequence.new({
 })
 StrokeGradient.Parent = CardStroke
 
--- ==========================================
--- 3. 自作アイコン（Asset APIから自動保存・取得）
--- ==========================================
 local LogoImage = Instance.new("ImageLabel")
-LogoImage.Size = UDim2.fromOffset(46, 46)
-LogoImage.Position = UDim2.fromOffset(22, 22)
+LogoImage.Size = UDim2.fromOffset(40, 40)
+LogoImage.Position = UDim2.fromOffset(18, 16)
 LogoImage.BackgroundColor3 = Color3.fromRGB(25, 27, 38)
 LogoImage.BackgroundTransparency = 1
 LogoImage.ImageTransparency = 1
@@ -81,39 +59,30 @@ LogoImage.BorderSizePixel = 0
 LogoImage.Parent = MainFrame
 
 local LogoCorner = Instance.new("UICorner")
-LogoCorner.CornerRadius = UDim.new(0, 10)
+LogoCorner.CornerRadius = UDim.new(0, 8)
 LogoCorner.Parent = LogoImage
 
--- ▼ Asset API経由で cuxe_icon.png を自動保存して読み込む！
 LogoImage.Image = Asset.Get("cuxe_icon.png")
 
--- ==========================================
--- 4. タイトル & 「BETA」バッジ
--- ==========================================
-local HeaderFrame = Instance.new("Frame")
-HeaderFrame.Size = UDim2.new(1, -90, 0, 24)
-HeaderFrame.Position = UDim2.fromOffset(80, 22)
-HeaderFrame.BackgroundTransparency = 1
-HeaderFrame.Parent = MainFrame
-
 local TitleLabel = Instance.new("TextLabel")
-TitleLabel.Size = UDim2.fromOffset(115, 24)
+TitleLabel.Size = UDim2.fromOffset(95, 20)
+TitleLabel.Position = UDim2.fromOffset(68, 16)
 TitleLabel.BackgroundTransparency = 1
 TitleLabel.Text = "CuxeWare"
 TitleLabel.TextColor3 = Color3.fromRGB(245, 245, 250)
 TitleLabel.Font = Enum.Font.GothamBold
-TitleLabel.TextSize = 18
+TitleLabel.TextSize = 17
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 TitleLabel.TextTransparency = 1
-TitleLabel.Parent = HeaderFrame
+TitleLabel.Parent = MainFrame
 
 local BetaBadge = Instance.new("Frame")
-BetaBadge.Size = UDim2.fromOffset(44, 18)
-BetaBadge.Position = UDim2.fromOffset(120, 3)
+BetaBadge.Size = UDim2.fromOffset(48, 18)
+BetaBadge.Position = UDim2.fromOffset(168, 17)
 BetaBadge.BackgroundColor3 = Color3.fromRGB(99, 102, 241)
 BetaBadge.BackgroundTransparency = 1
 BetaBadge.BorderSizePixel = 0
-BetaBadge.Parent = HeaderFrame
+BetaBadge.Parent = MainFrame
 
 local BadgeCorner = Instance.new("UICorner")
 BadgeCorner.CornerRadius = UDim.new(1, 0)
@@ -122,32 +91,42 @@ BadgeCorner.Parent = BetaBadge
 local BadgeText = Instance.new("TextLabel")
 BadgeText.Size = UDim2.fromScale(1, 1)
 BadgeText.BackgroundTransparency = 1
-BadgeText.Text = "BETA"
+BadgeText.Text = "ベータ版"
 BadgeText.TextColor3 = Color3.fromRGB(255, 255, 255)
 BadgeText.Font = Enum.Font.GothamBold
 BadgeText.TextSize = 10
 BadgeText.TextTransparency = 1
 BadgeText.Parent = BetaBadge
 
--- サブステータス文字
 local StatusLabel = Instance.new("TextLabel")
-StatusLabel.Size = UDim2.new(1, -90, 0, 16)
-StatusLabel.Position = UDim2.fromOffset(80, 48)
+StatusLabel.Size = UDim2.new(1, -125, 0, 14)
+StatusLabel.Position = UDim2.fromOffset(68, 39)
 StatusLabel.BackgroundTransparency = 1
 StatusLabel.Text = "INITIALIZING CORE..."
 StatusLabel.TextColor3 = Color3.fromRGB(130, 135, 155)
 StatusLabel.Font = Enum.Font.GothamMedium
 StatusLabel.TextSize = 11
 StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+StatusLabel.TextTruncate = Enum.TextTruncate.AtEnd
 StatusLabel.TextTransparency = 1
 StatusLabel.Parent = MainFrame
 
--- ==========================================
--- 5. ネオングラデーション・プログレスバー
--- ==========================================
+local PercentLabel = Instance.new("TextLabel")
+PercentLabel.Size = UDim2.fromOffset(45, 14)
+PercentLabel.Position = UDim2.new(1, -18, 0, 39)
+PercentLabel.AnchorPoint = Vector2.new(1, 0)
+PercentLabel.BackgroundTransparency = 1
+PercentLabel.Text = "0%"
+PercentLabel.TextColor3 = Color3.fromRGB(150, 155, 175)
+PercentLabel.Font = Enum.Font.GothamMedium
+PercentLabel.TextSize = 11
+PercentLabel.TextXAlignment = Enum.TextXAlignment.Right
+PercentLabel.TextTransparency = 1
+PercentLabel.Parent = MainFrame
+
 local BarBackground = Instance.new("Frame")
-BarBackground.Size = UDim2.new(1, -44, 0, 6)
-BarBackground.Position = UDim2.fromOffset(22, 94)
+BarBackground.Size = UDim2.new(1, -36, 0, 6)
+BarBackground.Position = UDim2.fromOffset(18, 70)
 BarBackground.BackgroundColor3 = Color3.fromRGB(28, 30, 42)
 BarBackground.BackgroundTransparency = 1
 BarBackground.BorderSizePixel = 0
@@ -174,39 +153,19 @@ BarGradient.Color = ColorSequence.new({
 })
 BarGradient.Parent = ProgressBar
 
--- パーセント表示
-local PercentLabel = Instance.new("TextLabel")
-PercentLabel.Size = UDim2.new(1, -44, 0, 16)
-PercentLabel.Position = UDim2.fromOffset(22, 110)
-PercentLabel.BackgroundTransparency = 1
-PercentLabel.Text = "0%"
-PercentLabel.TextColor3 = Color3.fromRGB(150, 155, 175)
-PercentLabel.Font = Enum.Font.GothamMedium
-PercentLabel.TextSize = 11
-PercentLabel.TextXAlignment = Enum.TextXAlignment.Right
-PercentLabel.TextTransparency = 1
-PercentLabel.Parent = MainFrame
-
--- ==========================================
--- 6. 登場アニメーション (Quartイージング)
--- ==========================================
-TweenService:Create(MainFrame, TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+TweenService:Create(MainFrame, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
     Position = UDim2.fromScale(0.5, 0.5),
     BackgroundTransparency = 0.08
 }):Play()
-TweenService:Create(AmbientGlow, TweenInfo.new(0.5), { ImageTransparency = 0.55 }):Play()
-TweenService:Create(CardStroke, TweenInfo.new(0.45), { Transparency = 0 }):Play()
-TweenService:Create(LogoImage, TweenInfo.new(0.35), { ImageTransparency = 0 }):Play()
-TweenService:Create(TitleLabel, TweenInfo.new(0.35), { TextTransparency = 0 }):Play()
-TweenService:Create(BadgeText, TweenInfo.new(0.35), { TextTransparency = 0 }):Play()
-TweenService:Create(BetaBadge, TweenInfo.new(0.35), { BackgroundTransparency = 0.2 }):Play()
-TweenService:Create(StatusLabel, TweenInfo.new(0.35), { TextTransparency = 0 }):Play()
-TweenService:Create(BarBackground, TweenInfo.new(0.35), { BackgroundTransparency = 0 }):Play()
-TweenService:Create(PercentLabel, TweenInfo.new(0.35), { TextTransparency = 0 }):Play()
+TweenService:Create(CardStroke, TweenInfo.new(0.4), { Transparency = 0 }):Play()
+TweenService:Create(LogoImage, TweenInfo.new(0.3), { ImageTransparency = 0 }):Play()
+TweenService:Create(TitleLabel, TweenInfo.new(0.3), { TextTransparency = 0 }):Play()
+TweenService:Create(BadgeText, TweenInfo.new(0.3), { TextTransparency = 0 }):Play()
+TweenService:Create(BetaBadge, TweenInfo.new(0.3), { BackgroundTransparency = 0.2 }):Play()
+TweenService:Create(StatusLabel, TweenInfo.new(0.3), { TextTransparency = 0 }):Play()
+TweenService:Create(PercentLabel, TweenInfo.new(0.3), { TextTransparency = 0 }):Play()
+TweenService:Create(BarBackground, TweenInfo.new(0.3), { BackgroundTransparency = 0 }):Play()
 
--- ==========================================
--- 7. ロード更新処理
--- ==========================================
 local function updateProgress(percent, text, duration)
     StatusLabel.Text = string.upper(text)
     PercentLabel.Text = tostring(math.floor(percent * 100)) .. "%"
@@ -232,14 +191,10 @@ task.wait(0.2)
 updateProgress(1.0, "Ready to Launch", 0.25)
 task.wait(0.35)
 
--- ==========================================
--- 8. 退出アニメーション & クリーンアップ
--- ==========================================
 TweenService:Create(MainFrame, TweenInfo.new(0.35, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {
-    Position = UDim2.fromScale(0.5, 0.47),
+    Position = UDim2.fromScale(0.5, 0.48),
     BackgroundTransparency = 1
 }):Play()
-TweenService:Create(AmbientGlow, TweenInfo.new(0.3), { ImageTransparency = 1 }):Play()
 
 for _, obj in ipairs(MainFrame:GetDescendants()) do
     if obj:IsA("TextLabel") then
